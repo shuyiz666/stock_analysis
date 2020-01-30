@@ -1,10 +1,4 @@
 # -*- coding: utf-8 -*-
-"""
-Created on Mon Nov  5 14:37:29 2018
-
-@author: epinsky
-"""
-# run this  !pip install pandas_datareader
 from pandas_datareader import data as web
 import os
 import pandas as pd
