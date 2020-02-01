@@ -23,9 +23,17 @@ try:
             position = 'short'
             daily_profit = round((100/float(row[7]))*(float(row[7])-float(row[12])),2)
         profit[position].append(daily_profit)
+    if len(profit['long']) == 0:
+        profit_long = 0
+    else:
+        profit_long = round(sum(profit['long'])/len(profit['long']),2)
+    if len(profit['short']) == 0:
+        profit_short = 0
+    else:
+        profit_short = round(sum(profit['short'])/len(profit['short']),2)
     print('Question 2:')
-    print('the profit from "long" positions is: ', round(sum(profit['long']),2),'%')
-    print('the profit from "short" positions is: ', round(sum(profit['short']),2),'%')
+    print('the profit from "long" positions is: ', profit_long,'%')
+    print('the profit from "short" positions is: ', profit_short,'%')
     if sum(profit['long']) > sum(profit['short']):
         print('"long" position is more profitable')
     elif sum(profit['long']) < sum(profit['short']):
