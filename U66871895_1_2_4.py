@@ -1,5 +1,4 @@
 import os
-# just use this for plot display
 import matplotlib.pyplot as plt
 
 ticker = 'ZSAN'
@@ -10,7 +9,7 @@ try:
     with open(ticker_file) as f:
         lines = f.read().splitlines()
     # data in different restrictions
-    xlabel, ylabel_total, ylabel_long,ylabel_short = [], [], [], []
+    xlabel, ylabel_long,ylabel_short = [], [], []
     # today's open: row[7]
     # yesterday's close: pre_row[12]
     # today's close: row[12]
@@ -35,7 +34,6 @@ try:
             profit[position].append(daily_profit)
         avg_profit = round((sum(profit['equal']) + sum(profit['long']) + sum(profit['short']))/(len(lines)-2),2)
         xlabel.append(v)
-        ylabel_total.append(avg_profit)
         if len(profit['long']) == 0:
             avg_long = 0
         else:
@@ -46,21 +44,29 @@ try:
             avg_short = round(sum(profit['short'])/len(profit['short']),2)
         ylabel_long.append(avg_long)
         ylabel_short.append(avg_short)
-        if j == 0:
-            print('Question 1: the average daily profit is ', avg_profit)
-            if avg_long > avg_short:
-                print('Question 2: long position is more profitable')
-            elif avg_long < avg_short:
-                print('Question 2: short position is more profitable')
-            else:
-                print('Question 2: they are equal')
-        # print(v,avg_profit,avg_long +avg_short,avg_long,avg_short)
-    # show total plot
-    plt.plot(xlabel,ylabel_total)
+
+    print('Question 4:')
+    print('In short position:')
+    print('The profit overall decline but fluctuate slightly.')
+    print('The lowest point is when x from 9.1% to 9.3% and it loss 7.34% money.')
+    print('')
+    print('In long position:')
+    print('The pattern is similar to the short position.But the The curve goes down more gently.')
+
+    # show short position plot
+    plt.plot(xlabel,ylabel_short)
     plt.xlabel('threshold value')
     plt.ylabel('Average Profit')
-    plt.title('The average profit per trade')
+    plt.title('The average profit per trade in "short" positions')
     plt.show()
+
+    # show long position plot
+    plt.plot(xlabel,ylabel_long)
+    plt.xlabel('threshold value')
+    plt.ylabel('Average Profit')
+    plt.title('The average profit per trade in "long" positions')
+    plt.show()
+
     # show long position and short position plot
     plt.plot(xlabel,ylabel_long,label = 'long')
     plt.plot(xlabel,ylabel_short,label = 'short')
