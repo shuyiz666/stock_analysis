@@ -2,7 +2,8 @@ import os
 import matplotlib.pyplot as plt
 
 ticker = 'ZSAN'
-input_dir = r'/Users/zhengshuyi'
+wd = os.getcwd()
+input_dir = wd
 ticker_file = os.path.join(input_dir, ticker + '.csv')
 
 try:

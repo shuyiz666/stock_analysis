@@ -15,7 +15,7 @@ def get_stock(ticker, start_date, end_date, s_window, l_window):
         df['Day'] = df['Date'].dt.day
         for col in ['Open', 'High', 'Low', 'Close', 'Adj Close']:
             df[col] = df[col].round(2)
-        df['Weekday'] = df['Date'].dt.weekday_name  
+        df['Weekday'] = df['Date'].dt.weekday
         df['Week_Number'] = df['Date'].dt.strftime('%U')
         df['Year_Week'] = df['Date'].dt.strftime('%Y-%U')
         df['Short_MA'] = df['Adj Close'].rolling(window=s_window, min_periods=1).mean()
@@ -33,13 +33,15 @@ def get_stock(ticker, start_date, end_date, s_window, l_window):
         return None
 
 try:
+    wd = os.getcwd()
     ticker='ZSAN'
-    input_dir = r'/Users/zhengshuyi'
+    input_dir = wd
     output_file = os.path.join(input_dir, ticker + '.csv')
     df = get_stock(ticker, start_date='2014-01-01', end_date='2019-12-31', 
                s_window=14, l_window=50)
     df.to_csv(output_file, index=False)
     print('wrote ' + str(len(df)) + ' lines to file: ' + output_file)
+
 except Exception as e:
     print(e)
     print('failed to get Yahoo stock data for ticker: ', ticker)

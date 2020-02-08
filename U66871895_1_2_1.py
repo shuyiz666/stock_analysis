@@ -1,7 +1,8 @@
 import os
 
+wd = os.getcwd()
 ticker = 'ZSAN'
-input_dir = r'/Users/zhengshuyi'
+input_dir = wd
 ticker_file = os.path.join(input_dir, ticker + '.csv')
 
 try:
