@@ -1,17 +1,22 @@
 '''
 assigment 2: Bollinger bands
-question 1: function bollinger
+question 3: repeat the previous question for 2018
 '''
 import os
 import pandas as pd
 import matplotlib.pylab as plt
+import timeit
+
+start = timeit.default_timer()
+
 
 ticker = 'ZSAN'
 wd = os.getcwd()
 input_dir = wd
 ticker_file = os.path.join(input_dir, ticker + '_weekly_return_volatility.csv')
 df = pd.read_csv(ticker_file)
-df2017 = df[df['Year'] == 2017]
+df2017 = df[df['Year'] == 2018]
+
 
 def bollinger(w,k):
     position = 'no'
@@ -50,7 +55,7 @@ def bollinger(w,k):
 
 try:
     df = pd.read_csv(ticker_file)
-    df2017 = df[df['Year'] == 2017]
+    df2017 = df[df['Year'] == 2018]
     k_range = [0.5,1,1.5,2,2.5]
     scatter_positive = pd.DataFrame(columns=('w','k','value'))
     scatter_negative = pd.DataFrame(columns=('w','k','value'))
@@ -73,6 +78,9 @@ try:
     plt.scatter(scatter_negative['w'],scatter_negative['k'],s=-scatter_negative['value'],c='red')
     plt.legend(['profit','loss'])
     plt.show()
+    print('It seems when k becomes bigger, the profit becomes higher.')
+    print('When k = 1.2 and k = 0.8, there is point which means there is no transaction happened.')
+    print('The transactions are less than 2017.')
 
 except Exception as e:
     # print(e)

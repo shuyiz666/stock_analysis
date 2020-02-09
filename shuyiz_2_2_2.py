@@ -1,6 +1,6 @@
 '''
 assigment 2: Bollinger bands
-question 2: examine points
+question 3: repeat the previous question for 2018
 '''
 print('When the W becomes bigger, the profit beacomes higher.')
 print('It seems that at k = 1 and k = 2.5, the profit is higher than others.')
