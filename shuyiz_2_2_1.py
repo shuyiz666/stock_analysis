@@ -78,7 +78,7 @@ try:
     plt.scatter(scatter_negative['w'],scatter_negative['k'],s=-scatter_negative['value'],c='red')
     plt.legend(['profit','loss'])
     plt.show()
-
+    print(avg_p)
 
     stop = timeit.default_timer()
 
