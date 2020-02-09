@@ -1,17 +1,17 @@
 '''
 assignment1: label weeks
-
 '''
 
 import os
 import pandas as pd
 import matplotlib.pyplot as plt
 
+wd = os.getcwd()
 ticker = 'ZSAN'
-input_dir = r'/Users/zhengshuyi'
+input_dir = wd
 
-root_dir = input_dir = r'/Users/zhengshuyi'
-input_dir = r'/Users/zhengshuyi'
+root_dir = input_dir = wd
+input_dir = wd
 ticker_file = os.path.join(input_dir, ticker + '.csv')
 plot_dir = os.path.join(root_dir, 'plots')
 

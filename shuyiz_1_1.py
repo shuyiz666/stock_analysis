@@ -28,11 +28,13 @@ def get_stock(ticker, start_date, end_date, s_window, l_window):
         df = df[col_list]
         print('read ', num_lines, ' lines of data for ticker: ' , ticker)
         return df
+
     except Exception as error:
         print(error)
         return None
 
 try:
+    os.getcwd()
     wd = os.getcwd()
     ticker='ZSAN'
     input_dir = wd
