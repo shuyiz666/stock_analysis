@@ -8,9 +8,10 @@ import statistics as sta
 import numpy as np
 
 ticker = 'ZSAN'
-input_dir = r'/Users/zhengshuyi'
+wd = os.getcwd()
+input_dir = wd
 ticker_file = os.path.join(input_dir, ticker + '.csv')
-plot_dir = r'/Users/zhengshuyi'
+plot_dir = wd
 
 try:
     df = pd.read_csv(ticker_file)
