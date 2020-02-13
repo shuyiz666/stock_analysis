@@ -5,7 +5,6 @@ question 3: compute the 4 error metrics
 import os
 import pandas as pd
 import statistics as sta
-import numpy as np
 
 ticker = 'ZSAN'
 wd = os.getcwd()
@@ -25,7 +24,7 @@ try:
         max_error = max(digit_fre['absolute error'])
         median_error = sta.median(digit_fre['absolute error'])
         mean_error = sta.mean(digit_fre['absolute error'])
-        RMSE_error = sta.mean(digit_fre['absolute error']**2)**0.05
+        RMSE_error = sta.mean(digit_fre['absolute error']**2)**0.5
         data.append([i, round(max_error,2), round(median_error,2), round(mean_error,2), round(RMSE_error,2)])
     title = ['year', 'max AE', 'median AE', 'mean AE', 'RMSE']
     result = pd.DataFrame(data, columns=title)
