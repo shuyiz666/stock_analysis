@@ -14,7 +14,8 @@ try:
     result = df.groupby(['Weekday'])['Item'].value_counts().rename('count').reset_index()
     print(result.groupby('Weekday').head(5),'\n')
     print('Coffee, bread, tea are top3 every day of the week.')
-    print('')
+    print('Sandwich is popular on Monday, Friday.')
+    print('Cake is not popular on Monday.')
 
 except Exception as e:
     print(e)
