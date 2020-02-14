@@ -32,13 +32,9 @@ try:
     equal_weight_merge['absolute errors square'] = (equal_weight_merge['freq_x'] - equal_weight_merge['freq_y'])**2
     Bernford_merge = pd.merge(real_distribution, Bernford, on = 'digit', how = 'outer')
     Bernford_merge['absolute errors square'] = (Bernford_merge['freq_x'] - Bernford_merge['freq_y'])**2
-    print('RMSE for Model 1 is: ',sta.mean(equal_weight_merge['absolute errors square'])**0.5)
-    print('RMSE for Model 2 is: ',sta.mean(Bernford_merge['absolute errors square'])**0.5)
-    print('Model 1:')
-    print(equal_weight_merge)
-    print('')
-    print('Model 2:')
-    print(Bernford_merge)
+    print('RMSE for Model 1 is: ',round(sta.mean(equal_weight_merge['absolute errors square'])**0.5,2))
+    print('RMSE for Model 2 is: ',round(sta.mean(Bernford_merge['absolute errors square'])**0.5,2))
+
 
 except Exception as e:
     print(e)
