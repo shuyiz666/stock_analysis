@@ -12,17 +12,16 @@ ticker_file = os.path.join(input_dir, 'BreadBasket_DMS_output.csv')
 
 try:
     df = pd.read_csv(ticker_file)
-    df = df[df['Item'] == 'Coffee']
     result = df.groupby(['Weekday','Year','Month','Day'])['Transaction'].count().groupby('Weekday').max()
-    print(result,'\n')
+    print(result/50,'\n')
 
-    print('2 barristas are needed for Monday')
-    print('1 barrista is needed for Tuesday')
-    print('2 barristas are needed for Wednesday')
-    print('1 barrista is needed for Thursday')
-    print('2 barristas are needed for Friday')
-    print('2 barristas are needed for Saturday')
-    print('2 barristas are needed for Sunday')
+    print('5 barristas are needed for Monday')
+    print('4 barrista is needed for Tuesday')
+    print('4 barristas are needed for Wednesday')
+    print('4 barrista is needed for Thursday')
+    print('4 barristas are needed for Friday')
+    print('7 barristas are needed for Saturday')
+    print('5 barristas are needed for Sunday')
 
 except Exception as e:
     print(e)
