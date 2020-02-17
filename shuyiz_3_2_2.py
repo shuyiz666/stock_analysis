@@ -28,30 +28,73 @@ try:
     equal_weight['digit'] = equal_weight['digit'].astype(int)
     Bernford['digit'] = Bernford['digit'].astype(int)
 
-    equal_weight_merge = pd.merge(real_distribution,equal_weight, on = 'digit', how = 'outer')
-    equal_weight_merge['relative errors'] = abs(equal_weight_merge['freq_x'] - equal_weight_merge['freq_y'])/equal_weight_merge['freq_x']
-    equal_weight_merge['relative errors'] = equal_weight_merge['relative errors'].apply(lambda x: format(x, '.2%'))
-    Bernford_merge = pd.merge(real_distribution, Bernford, on = 'digit', how = 'outer')
-    Bernford_merge['relative errors'] = abs(Bernford_merge['freq_x'] - Bernford_merge['freq_y'])/Bernford_merge['freq_x']
-    Bernford_merge['relative errors'] = Bernford_merge['relative errors'].apply(lambda x: format(x, '.2%'))
+    # relative error for model 1
+    # real_distribution and model 1
+    real_distribution_merge = pd.merge(real_distribution,equal_weight, on = 'digit', how = 'outer')
+    # freq_x: real_distribution, freq_y: model 1
+    real_distribution_merge['relative errors'] = abs(real_distribution_merge['freq_x'] - real_distribution_merge['freq_y'])/real_distribution_merge['freq_y']
 
-    print('Model 1:')
-    print(equal_weight_merge)
-    print('')
-    print('Model 2:')
-    print(Bernford_merge)
+    # equal_weight_distribution and model 1
+    equal_weight_merge = pd.merge(equal_weight, equal_weight, on = 'digit', how = 'outer')
+    # freq_x: equal_weight_distribution, freq_y: model 1
+    equal_weight_merge['relative errors'] = abs(equal_weight_merge['freq_x'] - equal_weight_merge['freq_y']) / equal_weight_merge['freq_y']
 
-    total_width, n = 0.8, 2
+    # bernford distribution and model 1
+    Bernford_merge = pd.merge(Bernford, equal_weight, on = 'digit', how = 'outer')
+    # freq_x: Bernford, freq_y: model 1
+    Bernford_merge['relative errors'] = abs(Bernford_merge['freq_x'] - Bernford_merge['freq_y'])/Bernford_merge['freq_y']
+
+    print('Relative error for model 1 as compared of frequencies with real distribution:')
+    print(real_distribution_merge,'\n')
+    print('Relative error for model 1 as compared of frequencies with equal-weight distribution:')
+    print(equal_weight_merge,'\n')
+    print('Relative error for model 1 as compared of frequencies with Bernford distribution:')
+    print(Bernford_merge,'\n')
+
+    total_width, n = 0.8, 3
     width = total_width/n
     x2 = [x + width for x in equal_weight_merge['digit']]
-    plt.bar(equal_weight_merge['digit'],equal_weight_merge['relative errors'], width = width,label='Model 1')
-    plt.bar(x2,Bernford_merge['relative errors'], width = width, label='Model 2')
-    plt.title('relative errors for Models 1 and 2')
+    x3 = [x + width*2 for x in Bernford_merge['digit']]
+    plt.bar(real_distribution_merge['digit'],real_distribution_merge['relative errors'], width = width,label='compared with real distribution')
+    plt.bar(x2,equal_weight_merge['relative errors'], width = width, label='compared equal-weight distribution')
+    plt.bar(x3,Bernford_merge['relative errors'], width = width, label='compared with Bernford distribution')
+    plt.title('relative errors for Model 1')
     plt.legend()
     plt.xlabel('digit')
     plt.ylabel('relative errors')
     plt.show()
 
+    # relative error for model 2
+    # real_distribution and model 2
+    real_distribution_merge2 = pd.merge(real_distribution,Bernford, on = 'digit', how = 'outer')
+    # freq_x: real_distribution, freq_y: model 2
+    real_distribution_merge2['relative errors'] = abs(real_distribution_merge2['freq_x'] - real_distribution_merge2['freq_y'])/real_distribution_merge2['freq_y']
+
+    # equal_weight_distribution and model 2
+    equal_weight_merge2 = pd.merge(equal_weight, Bernford, on = 'digit', how = 'outer')
+    # freq_x: equal_weight_distribution, freq_y: model 1
+    equal_weight_merge2['relative errors'] = abs(equal_weight_merge2['freq_x'] - equal_weight_merge2['freq_y']) / equal_weight_merge2['freq_y']
+
+    # bernford distribution and model 1
+    Bernford_merge2 = pd.merge(Bernford, Bernford, on = 'digit', how = 'outer')
+    # freq_x: Bernford, freq_y: model 2
+    Bernford_merge2['relative errors'] = abs(Bernford_merge2['freq_x'] - Bernford_merge2['freq_y'])/Bernford_merge2['freq_y']
+
+    print('Relative error for model 2 as compared of frequencies with real distribution:')
+    print(real_distribution_merge2,'\n')
+    print('Relative error for model 2 as compared of frequencies with equal-weight distribution:')
+    print(equal_weight_merge2,'\n')
+    print('Relative error for model 2 as compared of frequencies with Bernford distribution:')
+    print(Bernford_merge2,'\n')
+
+    plt.bar(real_distribution_merge2['digit'],real_distribution_merge2['relative errors'], width = width,label='compared with real distribution')
+    plt.bar(x2,equal_weight_merge2['relative errors'], width = width, label='compared equal-weight distribution')
+    plt.bar(x3,Bernford_merge2['relative errors'], width = width, label='compared with Bernford distribution')
+    plt.title('relative errors for Model 2')
+    plt.legend()
+    plt.xlabel('digit')
+    plt.ylabel('relative errors')
+    plt.show()
 
 except Exception as e:
     print(e)
