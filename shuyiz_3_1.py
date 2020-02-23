@@ -31,7 +31,7 @@ try:
 
         # trading by labels
         # red to green, buy stock
-        if row['label'] == 'red' and flag == 0:
+        if row['label'] == 'green' and flag == 0:
             shares = money/row['Adj Close']
             money = 0
             flag = 1
@@ -43,7 +43,7 @@ try:
         elif row['label'] == 'red' and flag == 0:
             value = shares*row['Adj Close']
         # green to red, sell stock
-        elif row['label'] == 'green' and flag == 1:
+        elif row['label'] == 'red' and flag == 1:
             money = shares*row['Adj Close']
             shares = 0
             value = money
