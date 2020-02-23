@@ -14,6 +14,7 @@ ticker_file = os.path.join(input_dir, ticker + '_label.csv')
 try:
     df = pd.read_csv(ticker_file)
     money = 100
+    shares = 0
     # flag = 0 only have money 1 only have stock
     flag = 0
     value = 100
