@@ -103,8 +103,8 @@ def KNN():
                 portfolio = money
             i += 1
             portfolios.append(portfolio)
-        avgs[k] = st.mean(portfolio)
-        stds[k] = st.stdev(portfolio)
+        avgs[k] = st.mean(portfolios)
+        stds[k] = st.stdev(portfolios)
         portfolio_dic[k] = portfolios
         return portfolio_dic, avgs, stds
 
@@ -115,14 +115,14 @@ print(KNN())
 
 
 
-    # fig = plt.figure(figsize=(10, 5))
-    # ax = fig.add_subplot(111)
-    # plt.title('comparison for two strategy')
-    # plt.xlabel('day', fontsize=14)
-    # xlabels = df['Year'].map(str)+'/'+df['Week_Number'].map(str)
-    # ax.axes.set_xticklabels(xlabels, rotation=90,fontsize=5)
-    # plt.ylabel('stock holding price', fontsize=14)
-    # plt.plot(xlabels,values)
-    # plt.plot(df['Year'].map(str)+'/'+df['Week_Number'].map(str),values_hold)
-    # plt.legend(['trading by label','buy_hold'])
-    # plt.show()
+fig = plt.figure(figsize=(10, 5))
+ax = fig.add_subplot(111)
+plt.title('portfolio growth')
+plt.xlabel('week_number', fontsize=14)
+xlabels = data['Week_Number']
+ax.axes.set_xticklabels(xlabels, rotation=90,fontsize=5)
+plt.ylabel('stock holding price', fontsize=14)
+plt.plot(xlabels,values)
+plt.plot(df['Year'].map(str)+'/'+df['Week_Number'].map(str),values_hold)
+plt.legend(['trading by label','buy_hold'])
+plt.show()
