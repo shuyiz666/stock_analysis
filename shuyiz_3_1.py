@@ -42,11 +42,12 @@ try:
             value = shares*row['Adj Close']
         # red to red, do nothing
         elif row['label'] == 'red' and flag == 0:
-            value = shares*row['Adj Close']
+            value = value
         # green to red, sell stock
         elif row['label'] == 'red' and flag == 1:
             money = shares*row['Adj Close']
             shares = 0
+            flag = 0
             value = money
         values.append(value)
     fig = plt.figure(figsize=(10, 5))

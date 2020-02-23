@@ -17,48 +17,50 @@ df = pd.read_csv(ticker_file)
 data = df[df['Year']==2018]
 
 def buy_hold():
-    values_hold = []
+    portfolios = []
     x = 0
     for index, row in data.iterrows():
         # buy hold strategy
         if x == 0:
-            values_hold.append(100)
+            portfolios.append(100)
             x += 1
             stock = 100 / row['Adj Close']
         else:
-            values_hold.append(stock * row['Adj Close'])
-    avg = st.mean(values_hold)
-    std = st.stdev(values_hold)
-    return values_hold, avg,std
+            portfolios.append(stock * row['Adj Close'])
+    avg = st.mean(portfolios)
+    std = st.stdev(portfolios)
+    return portfolios, avg,std
 
 def true_label():
     money = 100
+    shares = 0
     # flag = 0 only have money 1 only have stock
     flag = 0
-    value = 100
-    values = []
+    portfolio = 100
+    portfolios = []
     for index, row in data.iterrows():
         # red to green, buy stock
         if row['label'] == 'green' and flag == 0:
             shares = money/row['Adj Close']
             money = 0
             flag = 1
-            value = shares*row['Adj Close']
+            portfolio = shares*row['Adj Close']
         # green to green, do nothing
         elif row['label'] == 'green' and flag == 1:
-            value = shares*row['Adj Close']
+            portfolio = shares*row['Adj Close']
         # red to red, do nothing
         elif row['label'] == 'red' and flag == 0:
-            value = shares*row['Adj Close']
+            portfolio = portfolio
         # green to red, sell stock
         elif row['label'] == 'red' and flag == 1:
             money = shares*row['Adj Close']
             shares = 0
-            value = money
-        values.append(value)
-    avg = st.mean(values)
-    std = st.stdev(values)
-    return values, avg, std
+            flag = 0
+            portfolio = money
+        portfolios.append(portfolio)
+    avg = st.mean(portfolios)
+    std = st.stdev(portfolios)
+    return portfolios, avg, std
 
 def KNN():
     training = df[df['Year'] == 2017]
@@ -66,7 +68,7 @@ def KNN():
     Y = training[['label']].values
     avgs = {}
     stds = {}
-    values_dic = {}
+    portfolio_dic = {}
     ks = [1, 1.5, 2]
     for k in ks:
         knn_classifier = KNeighborsClassifier(n_neighbors=k)
@@ -75,34 +77,36 @@ def KNN():
         prediction = knn_classifier.predict(new_instance)
         i = 0
         money = 100
+        shares = 0
         # flag = 0 only have money 1 only have stock
         flag = 0
-        value = 100
-        values = []
+        portfolio = 100
+        portfolios = []
         for index, row in data.iterrows():
             # red to green, buy stock
             if prediction[i] == 'green' and flag == 0:
                 shares = money / row['Adj Close']
                 money = 0
                 flag = 1
-                value = shares * row['Adj Close']
+                portfolio = shares * row['Adj Close']
             # green to green, do nothing
             elif prediction[i] == 'green' and flag == 1:
-                value = shares * row['Adj Close']
+                portfolio = shares * row['Adj Close']
             # red to red, do nothing
             elif prediction[i] == 'red' and flag == 0:
-                value = shares * row['Adj Close']
+                portfolio = portfolio
             # green to red, sell stock
             elif prediction[i] == 'red' and flag == 1:
                 money = shares * row['Adj Close']
                 shares = 0
-                value = money
+                flag = 0
+                portfolio = money
             i += 1
-            values.append(value)
-        avgs[k] = st.mean(values)
-        stds[k] = st.stdev(values)
-        values_dic[k] = values
-        return values_dic, avgs, stds
+            portfolios.append(portfolio)
+        avgs[k] = st.mean(portfolio)
+        stds[k] = st.stdev(portfolio)
+        portfolio_dic[k] = portfolios
+        return portfolio_dic, avgs, stds
 
 print(buy_hold())
 print(true_label())
