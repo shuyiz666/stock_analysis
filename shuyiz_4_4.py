@@ -103,17 +103,16 @@ def KNN():
                 portfolio = money
             i += 1
             portfolios.append(portfolio)
+        print(k)
         avgs[k] = st.mean(portfolios)
         stds[k] = st.stdev(portfolios)
         portfolio_dic[k] = portfolios
         return portfolio_dic, avgs, stds
 
-print(buy_hold())
-print(true_label())
-print(KNN())
-
-
-
+buy_hold, buy_hold_avg, buy_hold_std = buy_hold()
+true_label, true_label_avg, true_label_std = true_label()
+knn, knn_avg, knn_std = KNN()
+print(knn)
 
 fig = plt.figure(figsize=(10, 5))
 ax = fig.add_subplot(111)
@@ -121,8 +120,15 @@ plt.title('portfolio growth')
 plt.xlabel('week_number', fontsize=14)
 xlabels = data['Week_Number']
 ax.axes.set_xticklabels(xlabels, rotation=90,fontsize=5)
-plt.ylabel('stock holding price', fontsize=14)
-plt.plot(xlabels,values)
-plt.plot(df['Year'].map(str)+'/'+df['Week_Number'].map(str),values_hold)
-plt.legend(['trading by label','buy_hold'])
+plt.ylabel('portfolio growth', fontsize=14)
+plt.plot(xlabels,buy_hold)
+plt.plot(xlabels,true_label)
+plt.plot(xlabels,knn[1])
+plt.plot(xlabels,knn[1.5])
+plt.plot(xlabels,knn[2])
+plt.legend(['buy_hold, mean = '+str(round(buy_hold_avg,2))+', std = '+str(round(buy_hold_std,2)),
+            'true_label, mean = '+str(round(true_label_avg,2))+', std = '+str(round(true_label_std,2)),
+            'knn: k = 1, mean = '+str(round(knn_avg[1],2))+', std = '+str(round(knn_std[1],2)),
+            'knn: k = 1.5, mean = '+str(round(knn_avg[1.5],2))+', std = '+str(round(knn_std[1.5],2)),
+            'knn: k = 2, mean = '+str(round(knn_avg[2],2))+', std = '+str(round(knn_std[2],2))])
 plt.show()
