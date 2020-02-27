@@ -1,5 +1,5 @@
 '''
-assignment0: Linear Separability
+assignment3: Linear Separability
 question1: take year 1 and examine the plot of your labels. Construct a reduced dataset by removing some green and red points so thatyou can draw a line separating the points. Compute the equation of such a line (many solutiuons are possible)
 '''
 

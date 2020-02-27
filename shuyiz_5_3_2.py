@@ -1,5 +1,5 @@
 '''
-assignment0: Linear Separability
+assignment3: Linear Separability
 question2: take this line and use it to assign labels for year 2
 '''
 
