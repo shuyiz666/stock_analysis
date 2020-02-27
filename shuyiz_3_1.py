@@ -13,6 +13,7 @@ ticker_file = os.path.join(input_dir, ticker + '_label.csv')
 
 try:
     df = pd.read_csv(ticker_file)
+    df = df[df['Year']==2017]
     money = 100
     shares = 0
     # flag = 0 only have money 1 only have stock
@@ -50,6 +51,7 @@ try:
             flag = 0
             value = money
         values.append(value)
+
     fig = plt.figure(figsize=(10, 5))
     ax = fig.add_subplot(111)
     plt.title('comparison for two strategy')
