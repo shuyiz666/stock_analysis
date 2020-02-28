@@ -19,17 +19,19 @@ class Custom_knn():
         pass
 
     def fit(self, X, Labels):
-        # attributes
+        # training
         self.X = X
         # class
         self.Labels = Labels
 
     def predict(self, new_x):
         df_dists = pd.DataFrame(columns=['label', 'distance'])
+        training = self.X[['mean_return', 'volatility']].values
+        testing = new_x[['mean_return', 'volatility']].values
         labels = []
-        for i in new_x:
-            for j in range(len(X)):
-                distance = np.linalg.norm(i - X[j], ord=self.distance_parameter_p)
+        for i in testing:
+            for j in range(len(training)):
+                distance = np.linalg.norm(i - training[j], ord = self.distance_parameter_p)
                 df_dists.loc[j] = [self.Labels[j], distance]
             Sorted_df_dists = df_dists.sort_values(by='distance', ascending=True)
             toplabel = Sorted_df_dists['label'][0:5]
@@ -40,15 +42,17 @@ class Custom_knn():
         return self.labels
 
     def draw_decision_boundary(self, new_x):
-        rs = []
-        sigmas = []
-        for [r, sigma] in new_x:
-            rs.append(r)
-            sigmas.append(sigma)
-        plt.scatter(rs, sigmas, color=np.array(self.labels), s=20, alpha=0.5)
-        plt.title('KNN prediction plot')
+        x = new_x['mean_return'].values
+        y = new_x['volatility'].values
+
+        id_list = new_x['Week_Number'].values
+
         plt.xlabel('mean')
         plt.ylabel('volatility')
+        plt.plot([1, 11 / 3], [0, 40], color='black', ls='dotted')
+        plt.scatter(x, y, color=np.array(self.labels))
+        for i, txt in enumerate(id_list):
+            plt.text(x[i] + 0.2, y[i] + 0.2, txt, fontsize=5)
         plt.show()
 
 
@@ -60,27 +64,25 @@ if __name__ == '__main__':
     df = pd.read_csv(ticker_file)
 
     training = df[df['Year'] == 2017]
-    X = training[['mean_return', 'volatility']].values
     Labels = training['label'].values
 
     testing = df[df['Year'] == 2018]
-    new_x = testing[['mean_return', 'volatility']].values
 
     p1 = Custom_knn(5, 1)
-    p1.fit(X, Labels)
-    predict1 = p1.predict(new_x)
+    p1.fit(training, Labels)
+    predict1 = p1.predict(testing)
     accuracy1 = round(sum(predict1 == testing['label']) / len(predict1), 2)
     print('accuracy for Manhattan distance is:', accuracy1)
 
     p1_5 = Custom_knn(5, 1.5)
-    p1_5.fit(X, Labels)
-    predict1_5 = p1_5.predict(new_x)
+    p1_5.fit(training, Labels)
+    predict1_5 = p1_5.predict(testing)
     accuracy1_5 = round(sum(predict1_5 == testing['label']) / len(predict1_5), 2)
     print('accuracy for Minkovski distance for p = 1.5 is:', accuracy1_5)
 
     p2 = Custom_knn(5, 2)
-    p2.fit(X, Labels)
-    predict2 = p2.predict(new_x)
+    p2.fit(training, Labels)
+    predict2 = p2.predict(testing)
     accuracy2 = round(sum(predict2 == testing['label']) / len(predict2), 2)
     print('accuracy for Euclidean distance is:', accuracy2)
 

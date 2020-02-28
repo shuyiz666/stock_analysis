@@ -46,11 +46,6 @@ class Custom_knn():
 
         id_list = new_x['Week_Number'].values
 
-        degree = 1
-        weights = np.polyfit(x,y,degree)
-        model = np.poly1d(weights)
-
-        ax, fig = plt.subplots()
         plt.xlabel('mean')
         plt.ylabel('volatility')
         plt.plot([1, 2.2], [0, 18], color='black', ls='dotted')
@@ -58,11 +53,6 @@ class Custom_knn():
         for i, txt in enumerate(id_list):
             plt.text(x[i] + 0.2, y[i] + 0.2, txt, fontsize=5)
         plt.show()
-        # plt.scatter(rs, sigmas, color=np.array(self.labels), s=20, alpha=0.5)
-        # plt.title('KNN prediction plot')
-        # plt.xlabel('mean')
-        # plt.ylabel('volatility')
-        # plt.show()
 
 if __name__ == '__main__':
     wd = os.getcwd()
@@ -79,7 +69,6 @@ if __name__ == '__main__':
     predict1 = p1.predict(training)
     accuracy1 = round(sum(predict1 == Labels) / len(predict1), 2)
     print('accuracy for Manhattan distance is:', accuracy1)
-    p1.draw_decision_boundary(training)
 
     p1_5 = Custom_knn(5,1.5)
     p1_5.fit(training, Labels)
