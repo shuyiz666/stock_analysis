@@ -18,7 +18,9 @@ class Custom_knn():
         pass
 
     def fit(self, X, Labels):
+        # training
         self.X = X
+        # training class
         self.Labels = Labels
 
     def predict(self, new_x):
@@ -43,22 +45,16 @@ class Custom_knn():
         y = self.X['volatility'].values
         id_list = self.X['Week_Number'].values
 
-        degree = 1
-        weights = np.polyfit(x,y,degree)
-        model = np.poly1d(weights)
-
         plt.xlabel('mean')
         plt.ylabel('volatility')
         plt.plot([1, 2.2], [0, 18], color='black', ls='dotted')
-        plt.scatter(x, y, color=np.array(self.labels))
+        plt.scatter(x, y, color=np.array(self.Labels))
         for i, txt in enumerate(id_list):
             plt.text(x[i] + 0.2, y[i] + 0.2, txt, fontsize=5)
 
-        x_new = new_x['mean_return'].values
-        y_new = model(x_new)
-        plt.scatter(x_new, y_new, color = 'blue')
-        plt.plot([x_new, x_new], [0, y_new], color=’black’, ls =’dotted’) plt.text(x_new + 0.4,
-                                                                                   y_new + 0.2, ’7’, fontsize = 10)
+        # x_new = new_x['mean_return'].values
+        # y_new = new_x['volatility'].values
+        # plt.scatter(x_new, y_new, color = 'blue')
         plt.show()
 
 if __name__ == '__main__':

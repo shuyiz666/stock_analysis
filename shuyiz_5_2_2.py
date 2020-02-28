@@ -42,17 +42,20 @@ class Custom_knn():
         return self.labels
 
     def draw_decision_boundary(self, new_x):
-        x = new_x['mean_return'].values
-        y = new_x['volatility'].values
-
-        id_list = new_x['Week_Number'].values
+        x = self.X['mean_return'].values
+        y = self.X['volatility'].values
+        id_list = self.X['Week_Number'].values
 
         plt.xlabel('mean')
         plt.ylabel('volatility')
-        plt.plot([1, 11 / 3], [0, 40], color='black', ls='dotted')
-        plt.scatter(x, y, color=np.array(self.labels))
+        plt.plot([1, 2.2], [0, 18], color='black', ls='dotted')
+        plt.scatter(x, y, color=np.array(self.Labels))
         for i, txt in enumerate(id_list):
             plt.text(x[i] + 0.2, y[i] + 0.2, txt, fontsize=5)
+
+        # x_new = new_x['mean_return'].values
+        # y_new = new_x['volatility'].values
+        # plt.scatter(x_new, y_new, color = 'blue')
         plt.show()
 
 

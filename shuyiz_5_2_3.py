@@ -26,34 +26,54 @@ class Custom_knn():
         self.Labels = Labels
 
     def predict(self, new_x):
-        df_dists = pd.DataFrame(columns=['label', 'distance'])
+        df_dists = pd.DataFrame(columns=['Week_Number','label', 'distance'])
         training = self.X[['mean_return', 'volatility']].values
         testing = new_x[['mean_return', 'volatility']].values
-        labels = []
+        labels,neighbors = [],[]
         for i in testing:
             for j in range(len(training)):
                 distance = np.linalg.norm(i - training[j], ord = self.distance_parameter_p)
-                df_dists.loc[j] = [self.Labels[j], distance]
+                df_dists.loc[j] = [self.X['Week_Number'][j], self.Labels[j], distance]
             Sorted_df_dists = df_dists.sort_values(by='distance', ascending=True)
             toplabel = Sorted_df_dists['label'][0:5]
+            # 5 neighbor for each row of new_x
+            neighbor = Sorted_df_dists['Week_Number'][0:5].values
+
             # freq label, frequency
             predict_label = Counter(toplabel).most_common(1)[0][0]
             labels.append(predict_label)
+            neighbors.append(neighbor)
         self.labels = labels
-        return self.labels
+        # neighbors list
+        self.neighbors = neighbors
+        return self.labels, self.neighbors
 
     def draw_decision_boundary(self, new_x):
-        x = new_x['mean_return'].values
-        y = new_x['volatility'].values
+        x = self.X['mean_return'].values
+        y = self.X['volatility'].values
+        id_list = self.X['Week_Number'].values
 
-        id_list = new_x['Week_Number'].values
-
+        plt.title('knn predict labels with neighbors')
         plt.xlabel('mean')
         plt.ylabel('volatility')
-        plt.plot([1, 11 / 3], [0, 40], color='black', ls='dotted')
-        plt.scatter(x, y, color=np.array(self.labels))
+        plt.plot([1, 2.2], [0, 18], color='black', ls='dotted')
+        plt.scatter(x, y, color=np.array(self.Labels))
         for i, txt in enumerate(id_list):
             plt.text(x[i] + 0.2, y[i] + 0.2, txt, fontsize=5)
+
+        x_new = new_x['mean_return'].values
+        y_new = new_x['volatility'].values
+        plt.scatter(x_new, y_new, color = self.labels,marker="*",s=80)
+
+        row = 0
+        while row < len(x_new):
+            # neighbor for each row of new_x
+            for neighbor_week_number in self.neighbors[row]:
+                neighbor_x = self.X.loc[self.X['Week_Number']==neighbor_week_number,'mean_return'].values[0]
+                neighbor_y = self.X.loc[self.X['Week_Number']==neighbor_week_number,'volatility'].values[0]
+                plt.plot([neighbor_x,x_new[row]],[neighbor_y,y_new[row]], color='darkgrey', ls='dotted')
+            row += 1
+
         plt.show()
 
 
@@ -69,12 +89,12 @@ if __name__ == '__main__':
 
     testing = df[df['Year'] == 2018]
 
+    new_x = testing[testing.Week_Number.isin([5,26])]
 
     p1_5 = Custom_knn(5, 1.5)
     p1_5.fit(training, Labels)
-    p1_5.predict(testing)
-    p1_5.draw_decision_boundary(testing)
-
+    labels, neighbors = p1_5.predict(new_x)
+    p1_5.draw_decision_boundary(new_x)
 
 
 
