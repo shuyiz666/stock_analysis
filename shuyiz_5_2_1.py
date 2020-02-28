@@ -15,7 +15,7 @@ class Custom_knn():
         self.distance_parameter_p = distance_parameter_p
 
     def __str__(self):
-        pass
+        return "number_neightbors_k = " + str(self.number_neighbors_k) + ", p = " + str(self.distance_parameter_p)
 
     def fit(self, X, Labels):
         # training
