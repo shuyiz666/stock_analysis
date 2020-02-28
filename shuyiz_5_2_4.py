@@ -103,7 +103,7 @@ if __name__ == '__main__':
 
     p2 = Custom_knn(5, 2)
     p2.fit(training, Labels)
-    predict2, neighbors2 = p1_5.predict(testing)
+    predict2, neighbors2 = p2.predict(testing)
     cm2 = confusion_matrix(testing['label'].values, predict2)
     print('confusion matrix for p = 2 is:\n', cm2, '\n')
 

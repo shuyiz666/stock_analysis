@@ -8,7 +8,7 @@ import os
 import pandas as pd
 from collections import Counter
 import matplotlib.pyplot as plt
-from sklearn.metrics import confusion_matrix
+import matplotlib.ticker as mtick
 
 
 class Custom_knn():
@@ -76,6 +76,47 @@ class Custom_knn():
 
         plt.show()
 
+def buy_hold(df):
+    portfolios = []
+    x = 0
+    for index, row in df.iterrows():
+        # buy hold strategy
+        if x == 0:
+            portfolios.append(100)
+            x += 1
+            stock = 100 / row['Adj Close']
+        else:
+            portfolios.append(stock * row['Adj Close'])
+    return portfolios
+
+
+def trade_with_label(df):
+    money = 100
+    # flag = 0 only have money 1 only have stock
+    flag = 0
+    portfolio = 100
+    portfolios = []
+    for index, row in df.iterrows():
+        # red to green, buy stock
+        if row['predict_label'] == 'green' and flag == 0:
+            shares = money / row['Adj Close']
+            money = 0
+            flag = 1
+            portfolio = shares * row['Adj Close']
+        # green to green, do nothing
+        elif row['predict_label'] == 'green' and flag == 1:
+            portfolio = shares * row['Adj Close']
+        # red to red, do nothing
+        elif row['predict_label'] == 'red' and flag == 0:
+            pass
+        # green to red, sell stock
+        elif row['predict_label'] == 'red' and flag == 1:
+            money = shares * row['Adj Close']
+            shares = 0
+            flag = 0
+            portfolio = money
+        portfolios.append(portfolio)
+    return portfolios
 
 if __name__ == '__main__':
     wd = os.getcwd()
@@ -88,24 +129,51 @@ if __name__ == '__main__':
     Labels = training['label'].values
 
     testing = df[df['Year'] == 2018]
+    portfolios_buy_hold = buy_hold(testing)
+    print('the portfolio value at the end of the year for buy hold is',round(portfolios_buy_hold[-1],2))
 
     p1 = Custom_knn(5, 1)
     p1.fit(training, Labels)
     predict1, neighbors1 = p1.predict(testing)
-    cm1 = confusion_matrix(testing['label'].values, predict1)
-    print('true positive rate for p = 1 is:', cm1[0][0], '\n','true negative rate for p = 1 is:', cm1[1][1], '\n')
+    testing_predict1 = testing.copy()
+    testing_predict1['predict_label'] = predict1
+    portfolios_p1 = trade_with_label(testing_predict1)
+    print('the portfolio value at the end of the year for p=1 is',round(portfolios_p1[-1],2))
 
     p1_5 = Custom_knn(5, 1.5)
     p1_5.fit(training, Labels)
     predict1_5, neighbors1_5 = p1_5.predict(testing)
-    cm1_5 = confusion_matrix(testing['label'].values, predict1_5)
-    print('true positive rate for p = 1.5 is:', cm1_5[0][0], '\n','true negative rate for p = 1.5 is:', cm1_5[1][1], '\n')
+    testing_predict1_5 = testing.copy()
+    testing_predict1_5['predict_label'] = predict1_5
+    portfolios_p1_5 = trade_with_label(testing_predict1_5)
+    print('the portfolio value at the end of the year for p=1.5 is', round(portfolios_p1_5[-1],2))
 
     p2 = Custom_knn(5, 2)
     p2.fit(training, Labels)
-    predict2, neighbors2 = p1_5.predict(testing)
-    cm2 = confusion_matrix(testing['label'].values, predict2)
-    print('true positive rate for p = 2 is:', cm2[0][0], '\n', 'true negative rate for p = 2 is:', cm2[1][1], '\n')
+    predict2, neighbors2 = p2.predict(testing)
+    testing_predict2 = testing.copy()
+    testing_predict2['predict_label'] = predict2
+    portfolios_p2 = trade_with_label(testing_predict2)
+    print('the portfolio value at the end of the year for p=2 is', round(portfolios_p2[-1],2))
+
+
+    fig, ax = plt.subplots(1, 1, figsize=(10, 5))
+    fmt = '${x:,.0f}'
+    tick = mtick.StrMethodFormatter(fmt)
+    ax.yaxis.set_major_formatter(tick)
+    plt.title('portfolio in different strategies')
+    plt.xlabel('week numbers')
+    plt.ylabel('portfolio')
+    plt.yticks()
+    plt.plot(testing['Week_Number'], portfolios_buy_hold)
+    plt.plot(testing['Week_Number'], portfolios_p1)
+    plt.plot(testing['Week_Number'], portfolios_p1_5)
+    plt.plot(testing['Week_Number'], portfolios_p2)
+    plt.legend(['buy hold','p=1','p=1.5','p=2'])
+    plt.show()
+
+    print('p = 1 results the largest portfolio value at the end of the year ')
+
 
 
 

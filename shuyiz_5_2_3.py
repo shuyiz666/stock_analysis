@@ -93,7 +93,7 @@ if __name__ == '__main__':
 
     p1_5 = Custom_knn(5, 1.5)
     p1_5.fit(training, Labels)
-    labels, neighbors = p1_5.predict(new_x)
+    labels, neighbors = p2.predict(new_x)
     p1_5.draw_decision_boundary(new_x)
 
 
