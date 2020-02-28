@@ -1,6 +1,6 @@
 '''
 assignment2: custom kNN
-question1: take three distance metrics: Euclidean (p = 2), Manhattan (p = 1) and generalized Minkovski for p = 1.5. For each value of p, compute the accuracy of your k-NN classifier on year 1 data. On x axis you plot p and on y-axis you plot accuracy. Which distance metric gives you the highest accuracy?
+question2: repeat this for year 2 and plot your results. Are there any differences with year 1
 '''
 
 import numpy as np

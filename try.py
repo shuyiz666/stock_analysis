@@ -12,8 +12,6 @@ df = pd.read_csv(ticker_file)
 training = df[df['Year'] == 2017]
 X = training[['mean_return','volatility']].values
 Labels = training['label'].values
+print(Labels)
 testing = df[df['Year'] == 2018]
 new_x = testing[['mean_return','volatility']].values
-
-for [r,sigma] in new_x:
-    print(r)
