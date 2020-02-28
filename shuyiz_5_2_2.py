@@ -9,8 +9,9 @@ import pandas as pd
 from collections import Counter
 import matplotlib.pyplot as plt
 
+
 class Custom_knn():
-    def __init__(self,number_neighbots_k, distance_parameter_p):
+    def __init__(self, number_neighbots_k, distance_parameter_p):
         self.number_neighbots_k = number_neighbots_k
         self.distance_parameter_p = distance_parameter_p
 
@@ -18,9 +19,9 @@ class Custom_knn():
         pass
 
     def fit(self, X, Labels):
-        # X 训练集 只有mean和sigma
+        # attributes
         self.X = X
-        # Labels 训练集 只有label
+        # class
         self.Labels = Labels
 
     def predict(self, new_x):
@@ -28,7 +29,7 @@ class Custom_knn():
         labels = []
         for i in new_x:
             for j in range(len(X)):
-                distance = np.linalg.norm(i - X[j], ord = self.distance_parameter_p)
+                distance = np.linalg.norm(i - X[j], ord=self.distance_parameter_p)
                 df_dists.loc[j] = [self.Labels[j], distance]
             Sorted_df_dists = df_dists.sort_values(by='distance', ascending=True)
             toplabel = Sorted_df_dists['label'][0:5]
@@ -39,10 +40,9 @@ class Custom_knn():
         return self.labels
 
     def draw_decision_boundary(self, new_x):
-        # new_x 测试集data
         rs = []
         sigmas = []
-        for [r,sigma] in new_x:
+        for [r, sigma] in new_x:
             rs.append(r)
             sigmas.append(sigma)
         plt.scatter(rs, sigmas, color=np.array(self.labels), s=20, alpha=0.5)
@@ -50,6 +50,7 @@ class Custom_knn():
         plt.xlabel('mean')
         plt.ylabel('volatility')
         plt.show()
+
 
 if __name__ == '__main__':
     wd = os.getcwd()
@@ -62,34 +63,36 @@ if __name__ == '__main__':
     X = training[['mean_return', 'volatility']].values
     Labels = training['label'].values
 
-    p1 = Custom_knn(5,1)
+    testing = df[df['Year'] == 2018]
+    new_x = testing[['mean_return', 'volatility']].values
+
+    p1 = Custom_knn(5, 1)
     p1.fit(X, Labels)
-    predict1 = p1.predict(X)
-    accuracy1 = round(sum(predict1 == Labels) / len(predict1), 2)
+    predict1 = p1.predict(new_x)
+    accuracy1 = round(sum(predict1 == testing['label']) / len(predict1), 2)
     print('accuracy for Manhattan distance is:', accuracy1)
 
-    p1_5 = Custom_knn(5,1.5)
+    p1_5 = Custom_knn(5, 1.5)
     p1_5.fit(X, Labels)
-    predict1_5 = p1_5.predict(X)
-    accuracy1_5 = round(sum(predict1_5 == Labels) / len(predict1_5), 2)
+    predict1_5 = p1_5.predict(new_x)
+    accuracy1_5 = round(sum(predict1_5 == testing['label']) / len(predict1_5), 2)
     print('accuracy for Minkovski distance for p = 1.5 is:', accuracy1_5)
 
-    p2 = Custom_knn(5,2)
+    p2 = Custom_knn(5, 2)
     p2.fit(X, Labels)
-    predict2 = p2.predict(X)
-    accuracy2 = round(sum(predict2 == Labels) / len(predict2), 2)
+    predict2 = p2.predict(new_x)
+    accuracy2 = round(sum(predict2 == testing['label']) / len(predict2), 2)
     print('accuracy for Euclidean distance is:', accuracy2)
 
-
     accuracys = [accuracy1, accuracy1_5, accuracy2]
-    ps = [1,1.5,2]
-    plt.title('k-NN classifier p and accuracy in year1')
+    ps = [1, 1.5, 2]
+    plt.title('k-NN classifier p and accuracy in year2')
     plt.xlabel('p', fontsize=14)
     plt.ylabel('accuracy', fontsize=14)
     plt.plot(ps, accuracys)
     plt.show()
 
-    print('accuracy for all distance are same which are all 88% ')
+    print('Minkovski and Euclidean both have highest accuracy which is 87%')
 
 
 
