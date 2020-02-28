@@ -6,6 +6,7 @@ question2: plot the ”growth” of your account. Week numbers on x, account bal
 import os
 import pandas as pd
 import matplotlib.pyplot as plt
+import matplotlib.ticker as mtick
 
 wd = os.getcwd()
 ticker = 'ZSAN'
@@ -42,8 +43,13 @@ for year in range(2017,2019):
             flag = 0
             value = money
         values.append(value)
+    fig, ax = plt.subplots(1, 1, figsize=(10, 5))
+    fmt = '${x:,.0f}'
+    tick = mtick.StrMethodFormatter(fmt)
+    ax.yaxis.set_major_formatter(tick)
     plt.title('growth of balance in '+str(year))
     plt.xlabel('week numbers')
-    plt.ylabel('stock holding price')
+    plt.ylabel('portfolio')
+    plt.yticks()
     plt.plot(df['Week_Number'],values)
     plt.show()

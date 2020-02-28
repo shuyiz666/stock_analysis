@@ -7,6 +7,7 @@ import numpy as np
 import os
 import pandas as pd
 from collections import Counter
+import matplotlib.pyplot as plt
 
 class Custom_knn():
     def __init__(self,number_neighbots_k, distance_parameter_p):
@@ -34,9 +35,21 @@ class Custom_knn():
             # freq label, frequency
             predict_label = Counter(toplabel).most_common(1)[0][0]
             labels.append(predict_label)
-        return labels
+        self.labels = labels
+        return self.labels
 
     def draw_decision_boundary(self, new_x):
+        # new_x 测试集data
+        rs = []
+        sigmas = []
+        for [r,sigma] in new_x:
+            rs.append(r)
+            sigmas.append(sigma)
+        plt.scatter(rs, sigmas, color=np.array(self.labels), s=20, alpha=0.5)
+        plt.title('KNN prediction plot')
+        plt.xlabel('mean')
+        plt.ylabel('volatility')
+        plt.show()
 
 if __name__ == '__main__':
     wd = os.getcwd()
@@ -47,8 +60,35 @@ if __name__ == '__main__':
 
     training = df[df['Year'] == 2017]
     X = training[['mean_return', 'volatility']].values
+    Labels = training['label'].values
     testing = df[df['Year'] == 2018]
     new_x = testing[['mean_return', 'volatility']].values
+
+
+    p1 = Custom_knn(5,1)
+    p1.fit(X, Labels)
+    predict1 = p1.predict(new_x)
+    accuracy1 = round(sum(predict1 == testing['label']) / len(predict1), 2)
+
+
+    p1_5 = Custom_knn(5,1.5)
+    p1_5.fit(X, Labels)
+    predict1_5 = p1_5.predict(new_x)
+    accuracy1_5 = round(sum(predict1_5 == testing['label']) / len(predict1_5), 2)
+
+    p2 = Custom_knn(5,2)
+    p2.fit(X, Labels)
+    predict2 = p2.predict(new_x)
+    accuracy2 = round(sum(predict2 == testing['label']) / len(predict2), 2)
+
+    accuracys = [accuracy1, accuracy1_5, accuracy2]
+    ps = [1,1.5,2]
+    plt.scatter(rs, sigmas, color=np.array(self.labels), s=20, alpha=0.5)
+    plt.title('KNN prediction plot')
+    plt.xlabel('mean')
+    plt.ylabel('volatility')
+    plt.show()
+
 
 
 
