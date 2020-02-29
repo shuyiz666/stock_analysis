@@ -93,19 +93,19 @@ if __name__ == '__main__':
     p1.fit(training, Labels)
     predict1, neighbors1 = p1.predict(testing)
     cm1 = confusion_matrix(testing['label'].values, predict1)
-    print('true positive rate for p = 1 is:', cm1[0][0], '\n','true negative rate for p = 1 is:', cm1[1][1], '\n')
+    print('true positive rate for p = 1 is:', '%s%%'%(round(cm1[0][0]*100/(cm1[0][0]+cm1[0][1]),2)), '\n','true negative rate for p = 1 is:', '%s%%'%round(cm1[1][1]*100/(cm1[1][1]+cm1[1][0]),2), '\n')
 
     p1_5 = Custom_knn(5, 1.5)
     p1_5.fit(training, Labels)
     predict1_5, neighbors1_5 = p1_5.predict(testing)
     cm1_5 = confusion_matrix(testing['label'].values, predict1_5)
-    print('true positive rate for p = 1.5 is:', cm1_5[0][0], '\n','true negative rate for p = 1.5 is:', cm1_5[1][1], '\n')
+    print('true positive rate for p = 1.5 is:', '%s%%'%(round(cm1_5[0][0]*100/(cm1_5[0][0]+cm1_5[0][1]),2)), '\n','true negative rate for p = 1.5 is:', '%s%%'%round(cm1_5[1][1]*100/(cm1_5[1][1]+cm1_5[1][0]),2), '\n')
 
     p2 = Custom_knn(5, 2)
     p2.fit(training, Labels)
     predict2, neighbors2 = p2.predict(testing)
     cm2 = confusion_matrix(testing['label'].values, predict2)
-    print('true positive rate for p = 2 is:', cm2[0][0], '\n', 'true negative rate for p = 2 is:', cm2[1][1], '\n')
+    print('true positive rate for p = 2 is:', '%s%%'%(round(cm2[0][0]*100/(cm2[0][0]+cm2[0][1]),2)), '\n', 'true negative rate for p = 2 is:', '%s%%'%round(cm2[1][1]*100/(cm2[1][1]+cm2[1][0]),2), '\n')
 
 
 
