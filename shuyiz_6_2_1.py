@@ -1,3 +1,8 @@
+'''
+assignment2: Weekly Trading with Linear Models
+question1: take weekly data for year 1. For each W = 5,6,...,12 and for each d = 1, 2, 3 construct the corresponding polynomials Use these polynomials to predict weekly labels. Plot the accuracy - on x axis you have W and you plot three curves for accuracy (separate curve for each d)
+'''
+
 import os
 import pandas as pd
 import numpy as np
