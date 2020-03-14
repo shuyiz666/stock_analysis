@@ -42,7 +42,7 @@ training = df[df['Year']==2017]
 
 plt.title('accuracy change with d and W')
 plt.xlabel('W')
-plt.ylabel('accuracy')
+plt.ylabel('accuracy(%)')
 
 W_range = list(range(5,13))
 legend = []
@@ -50,7 +50,7 @@ for d in range(1,4):
     y_axis = []
     for W in W_range:
         results, real_results = linear_model(W,d,training)
-        accuracy = '%s%%'%round(sum(np.array(results)==np.array(real_results))/len(results)*100,0)
+        accuracy = round(sum(np.array(results)==np.array(real_results))/len(results)*100,0)
         y_axis.append(accuracy)
     plt.plot(W_range, y_axis)
     legend.append('d='+str(d))
