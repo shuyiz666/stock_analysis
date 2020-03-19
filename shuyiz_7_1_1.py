@@ -5,19 +5,20 @@ question1: take W = 5,6,...,30 and consider your data for year 1. For each W in 
 import os
 import pandas as pd
 import numpy as np
+import matplotlib.pyplot as plt
+import matplotlib.ticker as mtick
 
 def linear_model(W,df):
-    index_year2 = df[df['Year'] == 2017].index.values.astype(int)[0]
+    # index_year2 = df[df['Year'] == 2017].index.values.astype(int)[0]
     t = 1 # day
     p = df['Adj Close'].values # price
-    start = index_year2-W
-    end = index_year2
+    start = 0
+    end = W
 
     position = 'no'
     shares = 0
-    trade = 0
     profit = 0
-    while end <= df.index[-1]:
+    while end < len(df):
         train_x = np.array(range(t,t+W)) # training days
         train_y = p[start:end] # training prices
         testing_x = t+W # testing day
@@ -36,7 +37,6 @@ def linear_model(W,df):
 
             elif position == 'short':
                 profit += shares*(px-p[end-1])
-                trade += 1
                 shares = 0
                 position = 'no'
 
@@ -51,7 +51,6 @@ def linear_model(W,df):
 
             elif position == 'long':
                 profit += shares*(p[end-1]-px)
-                trade += 1
                 shares = 0
                 position = 'no'
 
@@ -61,15 +60,32 @@ def linear_model(W,df):
         start += 1
         end += 1
         t += 1
-    profit_per_trade = profit / trade
-    return profit_per_trade
+    return profit
 
 wd = os.getcwd()
 ticker = 'ZSAN'
 input_dir = wd
 ticker_file = os.path.join(input_dir, ticker + '.csv')
 df = pd.read_csv(ticker_file)
+df2017 = df[df['Year']==2017]
 
-for W in range(5,10):
-    profit_per_trade = linear_model(W,df)
-    print(profit_per_trade)
+fig, ax = plt.subplots(1, 1, figsize=(10, 5))
+fmt = '${x:,.2f}'
+tick = mtick.StrMethodFormatter(fmt)
+ax.yaxis.set_major_formatter(tick)
+plt.title('Profit/Loss per trade with different W')
+plt.xlabel('W')
+plt.ylabel('P/L')
+plt.yticks()
+
+
+Ws = list(range(5,31))
+profits = []
+for W in Ws:
+    profit_per_trade = linear_model(W,df2017)/len(df2017)
+    profits.append(profit_per_trade)
+
+plt.plot(Ws, profits)
+plt.show()
+
+print('the optimal value of W is:', Ws[profits.index(max(profits))])
