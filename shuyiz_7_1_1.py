@@ -17,6 +17,7 @@ def linear_model(W,df):
     position = 'no'
     shares = 0
     profit = 0
+    transaction = 0
     while end < len(df):
         train_x = np.array(range(t,t+W)) # training days
         train_y = p[start:end] # training prices
@@ -38,6 +39,7 @@ def linear_model(W,df):
                 profit += shares*(px-p[end-1])
                 shares = 0
                 position = 'no'
+                transaction += 1
 
         elif predicted < p[end-1]:
             if position == 'no':
@@ -52,6 +54,7 @@ def linear_model(W,df):
                 profit += shares*(p[end-1]-px)
                 shares = 0
                 position = 'no'
+                transaction += 1
 
         elif predicted == p[end-1]:
             pass
@@ -59,7 +62,7 @@ def linear_model(W,df):
         start += 1
         end += 1
         t += 1
-    return profit
+    return profit/transaction
 
 wd = os.getcwd()
 ticker = 'ZSAN'
@@ -81,7 +84,7 @@ plt.yticks()
 Ws = list(range(5,31))
 profits = []
 for W in Ws:
-    profit_per_trade = linear_model(W,df2017)/len(df2017)
+    profit_per_trade = linear_model(W,df2017)
     profits.append(profit_per_trade)
 
 plt.plot(Ws, profits)

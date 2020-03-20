@@ -34,7 +34,6 @@ def linear_model(W,df):
 
 
             elif position == 'long':
-                long += 1
                 pass
 
             elif position == 'short':
@@ -50,7 +49,6 @@ def linear_model(W,df):
                 position = 'short'
 
             elif position == 'short':
-                short += 1
                 pass
 
             elif position == 'long':
