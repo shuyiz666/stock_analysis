@@ -96,7 +96,10 @@ accuracy_delta2_linear_model = sum(delta2_linear_model == real)/len(real)
 
 data = {'model':['logistic regression','KNN','linear model'],
         'accuracy':['%s%%'%(round(accuracy_logistic_regression*100,2)),'%s%%'%(round(accuracy_KNN*100,2)),'%s%%'%(round(accuracy_linear_model*100,2))],
-        'delta1':['%s%%'%(round(accuracy_delta1_logistic_regression*100,2)),'%s%%'%(round(accuracy_delta1_KNN*100,2)), '%s%%'%(round(accuracy_delta1_linear_model*100,2))],
-        'delta2':['%s%%'%(round(accuracy_delta2_logistic_regression*100,2)),'%s%%'%(round(accuracy_delta2_KNN*100,2)), '%s%%'%(round(accuracy_delta2_linear_model*100,2))]}
+        'delta1':['%s%%'%(round((accuracy_logistic_regression-accuracy_delta1_logistic_regression)*100,2)),'%s%%'%(round((accuracy_KNN-accuracy_delta1_KNN)*100,2)), '%s%%'%(round((accuracy_linear_model-accuracy_delta1_linear_model)*100,2))],
+        'delta2':['%s%%'%(round((accuracy_logistic_regression-accuracy_delta2_logistic_regression)*100,2)),'%s%%'%(round((accuracy_KNN-accuracy_delta2_KNN)*100,2)), '%s%%'%(round((accuracy_linear_model-accuracy_delta2_linear_model)*100,2))]}
 result = pd.DataFrame(data)
 print(result)
+
+print('it seems mu has larger influence to accuracy than sigma since delta1 is bigger than delta2 in all models')
+print('KNN has biggest change in three models when remove one feature')
