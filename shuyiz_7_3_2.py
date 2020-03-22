@@ -1,6 +1,6 @@
 '''
 assignment1: Change of Trend Detection
-question1:take years 1 and 2. For each month, compute the ”candi- date” days and decide whether there is a significant change of pricing trend in each month. Use 0.1 as critical value.
+question2: how many months exhibit significant price changes for your sotck ticker
 '''
 import os
 import numpy as np
@@ -21,6 +21,8 @@ input_dir = wd
 ticker_file = os.path.join(input_dir, ticker + '.csv')
 df = pd.read_csv(ticker_file)
 
+y1 = 0
+y2 = 0
 for year in range(2017,2019):
     for month in range(1,12):
 
@@ -45,8 +47,11 @@ for year in range(2017,2019):
         F = ((minimal[1]-minimal[0])/2)/(minimal[0]/(minimal[2]-4))
         p_value = fisher_f.cdf(F, 2, minimal[2]-4)
         if 1-p_value < 0.1:
-            print('Year',year,' month',month,'has significant change of price trend')
-        else:
-            print('Year',year,' month',month,'has not significant change of price trend')
+            if year == 2017:
+                y1 += 1
+            else:
+                y2 += 1
 
+print('in 2017,',y1,'months exhibit significant price changes')
+print('in 2018,',y2,'months exhibit significant price changes')
 
