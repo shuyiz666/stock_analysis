@@ -73,11 +73,6 @@ accuracy_logistic_regression = sum(total_logistic_regression == real)/len(real)
 accuracy_delta1_logistic_regression = sum(delta1_logistic_regression == real)/len(real)
 accuracy_delta2_logistic_regression = sum(delta2_logistic_regression == real)/len(real)
 
-#
-# print(accuracy_logistic_regression)
-# print(accuracy_delta1_logistic_regression)
-# print(accuracy_delta2_logistic_regression)
-
 total_KNN = KNN(train, label, test)
 delta1_KNN = KNN(train_sigma,label,test_sigma)
 delta2_KNN = KNN(train_mu,label,test_mu)
