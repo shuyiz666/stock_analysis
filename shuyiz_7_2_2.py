@@ -86,12 +86,6 @@ virginica_sepal_length_petal_length_accuracy = logistic_regression(virginica_sep
 virginica_sepal_length_petal_width = ['sepal-length', 'sepal-width', 'petal-length']
 virginica_sepal_length_petal_width_accuracy = logistic_regression(virginica_sepal_length_petal_width,virginica)
 
-# data = {'Flower':['Versicolor','Setosa','Virginica'],
-#         'sepal length':['%s%%'%(round((versicolor_accuracy-versicolor_sepal_length_accuracy)*100,2)),'%s%%'%(round((sentota_accuracy-setosa_sepal_length_accuracy)*100,2)),'%s%%'%(round((virginica_accuracy-virginica_sepal_length_accuracy)*100,2))],
-#         'sepal width':['%s%%'%(round((versicolor_accuracy-versicolor_sepal_length_sepal_width_accuracy)*100,2)),'%s%%'%(round((sentota_accuracy-setosa_sepal_width_accuracy)*100,2)), '%s%%'%(round((virginica_accuracy-virginica_sepal_length_sepal_width_accuracy)*100,2))],
-#         'petal length':['%s%%'%(round((versicolor_accuracy-versicolor_sepal_length_petal_length_accuracy)*100,2)),'%s%%'%(round((sentota_accuracy-setosa_petal_length_accuracy)*100,2)), '%s%%'%(round((virginica_accuracy-virginica_sepal_length_petal_length_accuracy)*100,2))],
-#         'petal width':['%s%%'%(round((versicolor_accuracy-versicolor_sepal_length_petal_width_accuracy)*100,2)),'%s%%'%(round((sentota_accuracy-setosa_petal_width_accuracy)*100,2)), '%s%%'%(round((virginica_accuracy-virginica_sepal_length_petal_width_accuracy)*100,2))]}
-#
 
 data = {'Flower':['sepal length','sepal width','petal length', 'petal width'],
         'Versicolor':['%s%%'%(round((versicolor_accuracy-versicolor_sepal_length_accuracy)*100,2)),'%s%%'%(round((versicolor_accuracy-versicolor_sepal_length_sepal_width_accuracy)*100,2)),'%s%%'%(round((versicolor_accuracy-versicolor_sepal_length_petal_length_accuracy)*100,2)),'%s%%'%(round((versicolor_accuracy-versicolor_sepal_length_petal_width_accuracy)*100,2))],
