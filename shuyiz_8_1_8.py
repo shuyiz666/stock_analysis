@@ -15,17 +15,10 @@ df = pd.read_csv(file_name)
 df['tip_percent'] = df['tip']/df['total_bill']
 
 smokers = df.groupby(['smoker'])['tip_percent'].mean()
-if smokers > :
-#     print("Non-smokers pay larger tips.")
-# elif mean_tip_smoke_no < mean_tip_smoke_yes:
-#     print("Smokers pay larger tips.")
-# else:
-#     print("Smokers and non-smokers pay equal tips")
 
-# plt.title('the relationship between days and tips')
-# plt.xlabel('day')
-# plt.ylabel('percentage tips')
-# plt.scatter(list(range(1,len(df)+1)),df['tip_percent'])
-# plt.show()
-#
-# print('the tips are not increasing with time in each day')
+if smokers['No'] > smokers['Yes']:
+    print("Non-smokers pay more tips.")
+elif smokers['No'] < smokers['Yes']:
+    print("Smokers pay more tips.")
+else:
+    print("Smokers and non-smokers pay equal tips")
