@@ -17,12 +17,12 @@ df = pd.read_csv(ticker_file)
 traning = df[df['Year']==2017]
 testing = df[df['Year']==2018]
 
-X = traning[['mean_return','mean_return']].values
+X = traning[['mean_return','volatility']].values
 Y = traning[['label']].values
 
 NB_classifier = GaussianNB().fit(X,Y.ravel())
 
-new_instance = np.asmatrix(testing[['mean_return','mean_return']].values)
+new_instance = np.asmatrix(testing[['mean_return','volatility']].values)
 prediction = NB_classifier.predict(new_instance)
 
 
