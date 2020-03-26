@@ -1,11 +1,12 @@
 '''
 assignment3: naive bayesian
-question1: implement a Gaussian naive bayesian classifier and compute its accuracy for year 2
+question3: what is true positive rate and true negative rate for year 2
 '''
 import os
 import numpy as np
 import pandas as pd
 from scipy.stats import norm
+from sklearn.metrics import confusion_matrix
 
 wd = os.getcwd()
 ticker = 'ZSAN'
@@ -54,5 +55,13 @@ for index, row in testing.iterrows():
     else:
         prediction.append('green')
 
-print('accuracy for year 2 is','%s%%'%round(sum(np.array(prediction)==testing[['label']].values.ravel())/len(testing[['label']].values.ravel())*100,2))
+cm = confusion_matrix(testing[['label']].values.ravel(), np.array(prediction))
+TN = cm[0][0]
+FN = cm[1][0]
+TP = cm[1][1]
+FP = cm[0][1]
+TPR = TP/(TP+FN)
+TNR = TN/(TN+FP)
 
+print('true positive rate is','%s%%'%round(TPR*100,2))
+print('true negative rate is','%s%%'%round(TNR*100,2))

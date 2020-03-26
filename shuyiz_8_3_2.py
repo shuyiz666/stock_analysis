@@ -1,11 +1,12 @@
 '''
 assignment3: naive bayesian
-question1: implement a Gaussian naive bayesian classifier and compute its accuracy for year 2
+question2: compute the confusion matrix for year 2
 '''
 import os
 import numpy as np
 import pandas as pd
 from scipy.stats import norm
+from sklearn.metrics import confusion_matrix
 
 wd = os.getcwd()
 ticker = 'ZSAN'
@@ -54,5 +55,5 @@ for index, row in testing.iterrows():
     else:
         prediction.append('green')
 
-print('accuracy for year 2 is','%s%%'%round(sum(np.array(prediction)==testing[['label']].values.ravel())/len(testing[['label']].values.ravel())*100,2))
-
+cm = confusion_matrix(testing[['label']].values.ravel(), np.array(prediction))
+print('confusion matrix is:\n',cm,'\n')
