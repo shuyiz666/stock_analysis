@@ -11,7 +11,7 @@ start = timeit.default_timer()
 
 
 ticker = 'ZSAN'
-wd = os.getcwd()
+wd = os.getwd()
 input_dir = wd
 ticker_file = os.path.join(input_dir, ticker + '_weekly_return_volatility.csv')
 df = pd.read_csv(ticker_file)
