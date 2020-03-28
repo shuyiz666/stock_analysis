@@ -25,7 +25,7 @@ X = scaler.transform(X)
 Y = training['label'].values
 log_reg_classifier = LogisticRegression()
 log_reg_classifier.fit(X,Y)
-new_x = scaler.transform(new)
+new_x = scaler.transform(new) 
 predicted = log_reg_classifier.predict(new_x)
 
 # trading by predict_labels
