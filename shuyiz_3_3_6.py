@@ -23,7 +23,7 @@ try:
     result = round(df.groupby('type')['Item_Price'].sum(),2)
     print(result,'\n')
     print('selling drinks make more money')
-
+ 
 
 except Exception as e:
     print(e)
