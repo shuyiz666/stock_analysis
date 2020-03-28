@@ -15,3 +15,4 @@ df['smoke_people'] = df.smoker.apply(lambda x:1 if 'Yes' in x else 0)
 smoke = sum(df['smoke_people']*df['size'])
 total = sum(df['size'])
 print('%s%%'%round(smoke/total*100,2))
+ 
