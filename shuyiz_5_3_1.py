@@ -33,5 +33,5 @@ plt.ylabel('volatility')
 for a,b,c in zip(df_remove['mean_return'],df_remove['volatility'],df_remove['Week_Number']):
     plt.text(a,b+0.1,c,ha = 'center',va = 'bottom',fontsize=7)
 plt.show()
-
+ 
 print('the equation is: y = 15*x-15')
