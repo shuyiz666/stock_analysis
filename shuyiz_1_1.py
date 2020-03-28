@@ -48,4 +48,3 @@ except Exception as e:
     print(e)
     print('failed to get Yahoo stock data for ticker: ', ticker)
  
-  
