@@ -46,4 +46,4 @@ for d in range(1,4):
         cm = confusion_matrix(real_label, results)
         print('the confusion matrics for d =',d,' and W =',W,':\n',cm,'\n')
 
-
+ 
