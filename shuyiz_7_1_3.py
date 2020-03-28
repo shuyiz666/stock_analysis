@@ -77,3 +77,4 @@ short,long = linear_model(5,df2018)
 
 print('long position:',long)
 print('short position:', short)
+ 
