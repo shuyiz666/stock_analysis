@@ -53,3 +53,4 @@ for year in range(2017,2019):
     plt.yticks()
     plt.plot(df['Week_Number'],values)
     plt.show()
+ 
