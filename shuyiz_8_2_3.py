@@ -33,4 +33,4 @@ TPR = TP/(TP+FN)
 TNR = TN/(TN+FP)
 
 print('true positive rate is','%s%%'%round(TPR*100,2))
-print('true negative rate is','%s%%'%round(TNR*100,2))
+print('true negative rate is','%s%%'%round(TNR*100,2)) 
