@@ -97,3 +97,4 @@ print(result)
 
 print('sepal width has most influcenc to the accuracy while sepal length and length petal has least')
 print('setosa has a very high accuracy and low delta which means each feature can decide its label')
+ 
