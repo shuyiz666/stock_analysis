@@ -46,3 +46,4 @@ except Exception as e:
     print(e)
     print('failed to read stock data for ticker: ', ticker)
   
+ 
