@@ -56,4 +56,4 @@ for index, row in testing.iterrows():
         prediction.append('green')
 
 cm = confusion_matrix(testing[['label']].values.ravel(), np.array(prediction))
-print('confusion matrix is:\n',cm,'\n')
+print('confusion matrix is:\n',cm,'\n') 
