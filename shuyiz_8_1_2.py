@@ -16,4 +16,4 @@ df['tip_percent'] = df['tip']/df['total_bill']
 average_tip = df.groupby(['day'],as_index=False)['tip_percent'].agg({'tip_percent':'mean'})
 average_tip['tip_percent'] = average_tip['tip_percent'].apply(lambda x:format(x,'.2%'))
 
-print(average_tip)
+print(average_tip) 
