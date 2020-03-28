@@ -55,4 +55,4 @@ for index, row in testing.iterrows():
         prediction.append('green')
 
 print('accuracy for year 2 is','%s%%'%round(sum(np.array(prediction)==testing[['label']].values.ravel())/len(testing[['label']].values.ravel())*100,2))
-
+ 
