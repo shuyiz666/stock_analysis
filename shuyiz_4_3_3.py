@@ -27,4 +27,4 @@ knn_classifier.fit(X,np.ravel(Y))
 new_instance = testing[['mean_return','volatility']].values
 prediction = knn_classifier.predict(new_instance)
 accuracy = round(sum(testing_np==prediction)/len(testing_np),2)
-print('the accuracy is', accuracy)
+print('the accuracy is', accuracy) 
