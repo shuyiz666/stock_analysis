@@ -49,4 +49,4 @@ for year in range(2017,2019):
         else:
             print('Year',year,' month',month,'has not significant change of price trend')
 
-
+ 
