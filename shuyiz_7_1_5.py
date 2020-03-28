@@ -77,3 +77,4 @@ shorts,longs = linear_model(5,df2018)
 
 print('the average number of days for short position is:',round(np.mean(shorts),2))
 print('the average number of days for long position is:', round(np.mean(longs)),2)
+ 
