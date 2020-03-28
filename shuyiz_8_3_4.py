@@ -112,5 +112,5 @@ plt.yticks()
 plt.plot(xlabels,portfolios)
 plt.plot(xlabels,portfolios_buy_hold)
 plt.legend(['trading with labels (naive bayesian)','buy hold'])
-plt.show()
+plt.show() 
 
