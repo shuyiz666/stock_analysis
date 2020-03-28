@@ -19,4 +19,4 @@ plt.ylabel('percentage tips')
 plt.scatter(list(range(1,len(df)+1)),df['tip_percent'])
 plt.show()
 
-print('the tips are not increasing with time in each day')
+print('the tips are not increasing with time in each day') 
