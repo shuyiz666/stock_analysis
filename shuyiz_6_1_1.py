@@ -24,4 +24,4 @@ log_reg_classifier = LogisticRegression()
 log_reg_classifier.fit(X,Y)
 print('the equation is:')
 print('y =',round(log_reg_classifier.coef_[0][0],2),'* mean_return + ',round(log_reg_classifier.coef_[0][1],2),'* volatility +',round(log_reg_classifier.intercept_[0],2))
-
+ 
