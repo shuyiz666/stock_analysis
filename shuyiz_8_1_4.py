@@ -15,4 +15,4 @@ df = pd.read_csv(file_name)
 df['tip_percent'] = df['tip']/df['total_bill']
 df['meal_price'] = df['total_bill']-df['tip']
 corr, _ = pearsonr(df['meal_price'], df['tip_percent'])
-print('Pearsons correlation: %.2f'%corr)
+print('Pearsons correlation: %.2f'%corr) 
