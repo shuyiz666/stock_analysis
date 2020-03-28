@@ -97,4 +97,4 @@ result = pd.DataFrame(data)
 print(result)
 
 print('it seems mu has larger influence to accuracy than sigma since delta1 is bigger than delta2 in all models')
-print('KNN has biggest change in three models when remove one feature')
+print('KNN has biggest change in three models when remove one feature') 
