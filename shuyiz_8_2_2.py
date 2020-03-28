@@ -25,4 +25,4 @@ new_instance = np.asmatrix(testing[['mean_return','volatility']].values)
 prediction = NB_classifier.predict(new_instance)
 
 cm = confusion_matrix(testing[['label']].values.ravel(), prediction)
-print('confusion matrix is:\n',cm,'\n')
+print('confusion matrix is:\n',cm,'\n') 
