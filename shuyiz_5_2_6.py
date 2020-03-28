@@ -1,6 +1,6 @@
 '''
 assignment2: custom kNN
-question4: compute the confusion matrices for p = 1, p = 1.5 and p=2
+question6: for p = 1, p = 1.5 and p = 2 implement a trading strategy based on your labels for year 2 and compare the perfor- mance with the ”buy-and-hold” strategy. For which value of p does your strategy result in the largest portfolio value at the end of the year?
 '''
 
 import numpy as np
@@ -180,5 +180,5 @@ if __name__ == '__main__':
 
 
 
-
+ 
 
