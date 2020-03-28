@@ -101,4 +101,4 @@ xlabels = df2['Week_Number']
 plt.ylabel('portfolio', fontsize=14)
 plt.yticks()
 plt.plot(xlabels,values_hold)
-plt.show()
+plt.show() 
