@@ -56,4 +56,4 @@ for d in range(1,4):
     legend.append('d='+str(d))
 
 plt.legend(legend)
-plt.show()
+plt.show() 
