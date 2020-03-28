@@ -78,4 +78,4 @@ df2018 = df[df['Year']==2018]
 short,long = linear_model(5,df2018)
 
 print('profit/loss per ”long position” trade:',round(long,2))
-print('profit/loss per ”short position” trade:', round(short,2))
+print('profit/loss per ”short position” trade:', round(short,2)) 
