@@ -1,6 +1,6 @@
 '''
 assignment2: custom kNN
-question4: compute the confusion matrices for p = 1, p = 1.5 and p=2
+question5: compute true positive rate and true negative rate
 '''
 
 import numpy as np
@@ -108,7 +108,7 @@ if __name__ == '__main__':
     print('true positive rate for p = 2 is:', '%s%%'%(round(cm2[0][0]*100/(cm2[0][0]+cm2[0][1]),2)), '\n', 'true negative rate for p = 2 is:', '%s%%'%round(cm2[1][1]*100/(cm2[1][1]+cm2[1][0]),2), '\n')
 
 
-
+ 
 
 
 
