@@ -18,4 +18,4 @@ plt.xlabel('mean')
 plt.ylabel('volatility')
 for a,b,c in zip(df['mean_return'],df['volatility'],df['Week_Number']):
     plt.text(a,b+0.1,c,ha = 'center',va = 'bottom',fontsize=7)
-plt.show()
+plt.show() 
