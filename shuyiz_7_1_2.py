@@ -48,3 +48,4 @@ plt.show()
 print('the average of r square is:', round(np.mean(r2s),2))
 print('the r square vary a lot which means the close price of the stock is unstable')
 
+ 
