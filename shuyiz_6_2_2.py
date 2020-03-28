@@ -56,3 +56,4 @@ results3 = linear_model(W3,d3,df)
 accuracy3 = '%s%%'%round(sum(np.array(results3)==real_label)/len(results3)*100,2)
 print('predicted label when d = 3 and W = 11\n', results3)
 print('accuracy:',accuracy3,'\n')
+ 
