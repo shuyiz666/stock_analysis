@@ -43,3 +43,4 @@ for year in range(2017,2019):
     print('in',str(year),':')
     print('when the week number is', max(values, key=values.get), ', the balance reached its peak at',round(max(values.values()),2))
     print('when the week number is', min(values, key=values.get), ', the balance became least at',round(min(values.values()), 2),'\n')
+ 
