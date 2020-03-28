@@ -88,6 +88,6 @@ for results in predicted_labels:
     plt.plot(testing['Week_Number'], portfolios)
 
 plt.legend(['d=1,W=12','d=21,W=9','d=3,W=11'])
-plt.show()
+plt.show() 
 
 
