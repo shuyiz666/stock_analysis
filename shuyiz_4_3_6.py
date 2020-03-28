@@ -27,4 +27,4 @@ knn_classifier.fit(X,np.ravel(Y))
 new_instance = testing[['mean_return','volatility']].values
 prediction = knn_classifier.predict(new_instance)
 cm = confusion_matrix(testing_np, prediction)
-print('True negative = ', cm[1][1])
+print('True negative = ', cm[1][1]) 
