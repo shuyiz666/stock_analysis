@@ -1,6 +1,6 @@
 '''
 assignment1: tips
-question1: what is the average tip (as a percentage of meal cost) for for lunch and for dinner
+question1: what is the average tip (as a percentage of meal cost) for lunch and for dinner
 '''
 import os
 import pandas as pd
