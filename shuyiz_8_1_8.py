@@ -22,3 +22,4 @@ elif smokers['No'] < smokers['Yes']:
     print("Smokers pay more tips.")
 else:
     print("Smokers and non-smokers pay equal tips")
+ 
