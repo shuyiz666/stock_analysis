@@ -90,4 +90,4 @@ for W in Ws:
 plt.plot(Ws, profits)
 plt.show()
 
-print('the optimal value of W is:', Ws[profits.index(max(profits))])
+print('the optimal value of W is:', Ws[profits.index(max(profits))]) 
