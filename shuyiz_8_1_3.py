@@ -17,4 +17,5 @@ tip_each_day_time = df.groupby(['day','time'],as_index=False)['tip_percent'].agg
 tip_each_day_time['tip_percent'] = tip_each_day_time['tip_percent'].apply(lambda x:format(x,'.2%'))
 highest_tip = tip_each_day_time[tip_each_day_time['tip_percent']==max(tip_each_day_time['tip_percent'])]
 
-print(highest_tip) 
+print('consider day and time together, the highest tip day and time is:')
+print(highest_tip)
