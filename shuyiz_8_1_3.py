@@ -19,3 +19,4 @@ highest_tip = tip_each_day_time[tip_each_day_time['tip_percent']==max(tip_each_d
 
 print('consider day and time together, the highest tip day and time is:')
 print(highest_tip)
+ 
