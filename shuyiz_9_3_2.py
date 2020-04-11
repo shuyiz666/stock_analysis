@@ -34,6 +34,7 @@ def random_forest(traning, testing, d, N):
 
 
 prediction,Y_test = random_forest(traning, testing, 3, 5)
+accuracy = sum(prediction == Y_test)/len(Y_test)
 cm = confusion_matrix(Y_test, prediction)
 print('the confusion matrix for random forest is:\n',cm)
 TN = cm[0][0]
