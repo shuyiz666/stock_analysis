@@ -27,4 +27,10 @@ knn_classifier.fit(X,np.ravel(Y))
 new_instance = testing[['mean_return','volatility']].values
 prediction = knn_classifier.predict(new_instance)
 cm = confusion_matrix(testing_np, prediction)
-print('True positive = ', cm[0][0]) 
+TN = cm[0][0]
+FN = cm[1][0]
+TP = cm[1][1]
+FP = cm[0][1]
+TPR = TP/(TP+FN)
+TNR = TN/(TN+FP)
+print('True positive rate: ', '%s%%'%round(TPR*100,2))
